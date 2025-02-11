@@ -1,4 +1,4 @@
-# Secure Parallel Communicator v9.1
+# Secure Parallel Communicator v1.0
 
 ## Overview
 
@@ -79,6 +79,10 @@ This Python project is a secure communication tool that implements multi-channel
 - **Parallel Processing:**  
   Message fragmentation allows parts of the same message to be sent in parallel, increasing both throughput and resilience.
 
+- **Dynamic Protocol Switching (Additional Security Concept):**  
+  Instead of switching ports, the system can dynamically change the fragmentation and reassembly protocol on the established connection according to a random scheme. Both client and server use a synchronized mechanism (e.g., a PRNG initialized with a shared seed) to coordinate these changes without needing a new handshake or connection setup, thereby further enhancing the unpredictability and security of the communication.
+
+
 ## Performance and Security Considerations
 
 - **Computation Time:**  
@@ -90,6 +94,18 @@ This Python project is a secure communication tool that implements multi-channel
 ## Disclaimer
 
 This project is a proof-of-concept and a thought experiment. Although it uses advanced cryptographic methods, it has not undergone extensive security audits. **Do not use this code for highly sensitive or mission-critical applications without further review and testing.** Contributions, feedback, and suggestions for improvements are highly welcome.
+
+## Additional Ideas and Future Enhancements
+
+- **Dynamic Protocol Switching (Additional Security Concept):**  
+  Instead of switching ports, the system can dynamically change the fragmentation and reassembly protocol on the established connection according to a random scheme. Both client and server use a synchronized mechanism (e.g., a PRNG initialized with a shared seed) to coordinate these changes without needing a new handshake or connection setup, thereby further enhancing the unpredictability and security of the communication.
+
+- **Individual Port Configuration (Additional Feature):**  
+  Currently, the implementation assigns ports sequentially (e.g., base port, base port + 1, etc.). A potential enhancement is to allow each port to be configured individually with selective port numbers. This would provide greater flexibility in network configuration and allow users to tailor port assignments to meet specific performance or security requirements.
+
+- **Multi-IP Assignment / Dual Network Interface Support (Additional Feature):**  
+  Another idea is to enable ports to be bound to different IP addresses on both the server and client sides. For example, a server and client could simultaneously use a LAN connection and a WiFi connection (e.g., via a smartphone hotspot). This would allow different ports to operate on separate IP addresses, offering increased network flexibility, redundancy, and potentially improved connectivity.
+
 
 ## Contributions
 
