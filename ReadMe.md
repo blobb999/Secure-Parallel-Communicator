@@ -82,7 +82,6 @@ This Python project is a secure communication tool that implements multi-channel
 - **Dynamic Protocol Switching (Additional Security Concept):**  
   Instead of switching ports, the system can dynamically change the fragmentation and reassembly protocol on the established connection according to a random scheme. Both client and server use a synchronized mechanism (e.g., a PRNG initialized with a shared seed) to coordinate these changes without needing a new handshake or connection setup, thereby further enhancing the unpredictability and security of the communication.
 
-
 ## Performance and Security Considerations
 
 - **Computation Time:**  
@@ -90,10 +89,6 @@ This Python project is a secure communication tool that implements multi-channel
 
 - **Security Comparison:**  
   While the cryptographic primitives (RSA, AES-256, ChaCha20) meet modern security standards, the overall design (especially as implemented in Python) is experimental. It may exceed common commercial security standards but should not be assumed to meet military-grade requirements without further rigorous evaluation.
-
-## Disclaimer
-
-This project is a proof-of-concept and a thought experiment. Although it uses advanced cryptographic methods, it has not undergone extensive security audits. **Do not use this code for highly sensitive or mission-critical applications without further review and testing.** Contributions, feedback, and suggestions for improvements are highly welcome.
 
 ## Additional Ideas and Future Enhancements
 
@@ -106,8 +101,35 @@ This project is a proof-of-concept and a thought experiment. Although it uses ad
 - **Multi-IP Assignment / Dual Network Interface Support (Additional Feature):**  
   Another idea is to enable ports to be bound to different IP addresses on both the server and client sides. For example, a server and client could simultaneously use a LAN connection and a WiFi connection (e.g., via a smartphone hotspot). This would allow different ports to operate on separate IP addresses, offering increased network flexibility, redundancy, and potentially improved connectivity.
 
+## Estimated Challenge to Break this Encryption Concept
+
+It's very challenging to provide a precise probability for breaking such a system without making numerous assumptions about the attacker's capabilities, the absence of implementation flaws, and the precise behavior of the dynamic protocol switching. However, here’s a rough overview based on current cryptographic estimates:
+
+- **Cryptographic Primitives:**
+  - **RSA 2048-bit:**  
+    Breaking RSA by factoring a 2048-bit modulus is estimated to require on the order of 2^112 or more operations (depending on the best available factoring algorithms). On today’s classical hardware, this would take billions of years—even with a large supercomputer—making it practically infeasible.
+  - **AES-256 and ChaCha20:**  
+    Both AES-256 and ChaCha20 are considered secure against brute-force attacks. A brute-force search on a 256-bit key space would require 2^256 operations, which is astronomically high.
+
+- **Dynamic Protocol Switching and Fragmentation:**  
+  The additional complexity introduced by dynamically switching the fragmentation/reassembly protocols increases the difficulty for an attacker because they must correctly interpret and reassemble the message fragments under varying schemes. Even if an attacker were to partially break one layer, the constant change in protocol adds uncertainty and forces a combinatorial explosion of possibilities.
+
+- **Overall System Complexity:**  
+  When you combine the strength of the underlying cryptographic algorithms with the added layers of dynamic protocol switching and multi-channel communication, the effective work factor for an attacker increases even further. Even if one were to assume that the dynamic changes somehow introduce an additional factor of complexity (multiplying the attacker's work by several orders of magnitude), this still leaves the overall security at a level that is currently beyond practical reach.
+
+- **Time Estimates:**
+  - **On Classical Hardware:**  
+    Given the current state of technology, an attack targeting the RSA component alone would likely require billions of years—even if one assumed optimistic improvements in computing power.
+  - **With Quantum Computers:**  
+    A sufficiently large and error-corrected quantum computer could, in theory, break RSA using Shor’s algorithm. However, such quantum machines are not yet available, and the additional dynamic protocol switching further complicates matters for any potential quantum attacker.
+
+**In Summary:**  
+Under current assumptions and with a proper implementation, the probability of breaking the system using classical computing resources is effectively negligible. An attacker would likely need revolutionary advances in cryptanalysis or the advent of powerful quantum computers—neither of which are expected in the near future. In practical terms, if the system is correctly implemented, an adversary would need to invest computational resources over timescales that far exceed practical limits (i.e., centuries or even millennia of continuous computation on state-of-the-art hardware).
+
+## Disclaimer
+
+This project is a proof-of-concept and a thought experiment. Although it uses advanced cryptographic methods, it has not undergone extensive security audits. **Do not use this code for highly sensitive or mission-critical applications without further review and testing.** Contributions, feedback, and suggestions for improvements are highly welcome.
 
 ## Contributions
 
 Feedback, ideas, and contributions to further enhance the security of this project are encouraged. Please open an issue or submit a pull request with your suggestions.
-
