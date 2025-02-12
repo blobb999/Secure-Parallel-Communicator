@@ -79,9 +79,6 @@ This Python project is a secure communication tool that implements multi-channel
 - **Parallel Processing:**  
   Message fragmentation allows parts of the same message to be sent in parallel, increasing both throughput and resilience.
 
-- **Dynamic Protocol Switching (Additional Security Concept):**  
-  Instead of switching ports, the system can dynamically change the fragmentation and reassembly protocol on the established connection according to a random scheme. Both client and server use a synchronized mechanism (e.g., a PRNG initialized with a shared seed) to coordinate these changes without needing a new handshake or connection setup, thereby further enhancing the unpredictability and security of the communication.
-
 ## Performance and Security Considerations
 
 - **Computation Time:**  
